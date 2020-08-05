@@ -5,9 +5,32 @@ fetch("/api/transaction")
   .then(response => {
     return response.json();
   })
-  .then(data => {
+  .then(async function (data) {
+
+    const indexedDB = await getIndexedDB();
+    console.log(indexedDB);
+
+    // Make a post request
+    fetch("/api/transaction/bulk", {
+      method: "POST",
+      body: JSON.stringify(indexedDB),
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json"
+      }
+    }).then(response => {
+      return response.json();
+    })
+      .then(data => {
+        console.log("Database successfull added!");
+        // Clear out indexedDB
+        clearIndexedDB();
+      })
+      .catch(err => {
+        console.log("Still no database connection.")
+      })
     // save db data on global variable
-    transactions = data;
+    transactions = [...indexedDB.reverse(), ...data];
 
     populateTotal();
     populateTable();
@@ -151,3 +174,6 @@ document.querySelector("#add-btn").onclick = function() {
 document.querySelector("#sub-btn").onclick = function() {
   sendTransaction(false);
 };
+
+
+//function to save record into IndexedDb
