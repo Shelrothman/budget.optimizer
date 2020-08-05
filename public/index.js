@@ -196,11 +196,9 @@ function saveRecord(expenseItem) {
 	// Create variables for a new transaction on the database, objectStore and the index.
 	request.onsuccess = () => {
 		const db = request.result;
-		// console.log(db);
 		const transaction = db.transaction(["expense"], "readwrite");
 		const expenseStore = transaction.objectStore("expense");
-		// const nameIndex = expenseStore.index("nameIndex");
-		// const valueIndex = expenseStore.index("valueIndex");
+	
 
 		// Add expense item to our expenseStore
 		expenseStore.add({
@@ -209,4 +207,32 @@ function saveRecord(expenseItem) {
 			value: expenseItem.value,
 		});
 	};
+}
+
+
+function clearIndexedDB() {
+  const request = window.indexedDB.open("expense", 1);
+
+  // Create schema
+  request.onupgradeneeded = event => {
+    const db = event.target.result;
+
+    // Create a expense object store with a listID keyPath that can be used to query on.
+    const expenseStore = db.createObjectStore("expense", { keyPath: "date" });
+    // Create an index for "column" to query on.
+    expenseStore.createIndex("nameIndex", "name");
+    expenseStore.createIndex("valueIndex", "value");
+  }
+
+  request.onsuccess = () => {
+    const db = request.result;
+
+    const transaction = db.transaction(["expense"], "readwrite");
+    const expenseStore = transaction.objectStore("expense");
+
+    const clearRequest = expenseStore.clear();
+    clearRequest.onsuccess = () => {
+      console.log("IndexedDB has been cleared!");
+    }
+  }
 }
