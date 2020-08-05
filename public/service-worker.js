@@ -85,7 +85,7 @@ self.addEventListener("fetch", function(event) {
 
     // Serve static files from the cache.
     // Then do a network request when the resource is not in the cache
-    // This code allows the page to be accessible offline**
+    // This code allows the page to be accessible offline****
     event.respondWith(
         caches.open(CACHE_NAME).then(cache => {
             return cache.match(event.request).then(response => {
