@@ -236,3 +236,33 @@ function clearIndexedDB() {
     }
   }
 }
+
+// Function to grab data from IndexedDB
+function getIndexedDB() {
+  return new Promise((resolve, reject) => {
+    const request = window.indexedDB.open("expense", 1);
+
+    // Create schema
+    request.onupgradeneeded = event => {
+      const db = event.target.result;
+
+      // Create a expense object store with a listID keyPath that can be used to query on.
+      const expenseStore = db.createObjectStore("expense", { keyPath: "date" });
+      // Create an index for "column" to query on.
+      expenseStore.createIndex("nameIndex", "name");
+      expenseStore.createIndex("valueIndex", "value");
+    }
+
+    request.onsuccess = () => {
+      const db = request.result;
+
+      const transaction = db.transaction(["expense"], "readwrite");
+      const expenseStore = transaction.objectStore("expense");
+
+      const getRequest = expenseStore.getAll();
+      getRequest.onsuccess = () => {
+        return resolve(getRequest.result);
+      }
+    }
+  })
+}
