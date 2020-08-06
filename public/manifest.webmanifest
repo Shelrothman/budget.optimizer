@@ -3,13 +3,8 @@
     "name": "Budget Optimizer",
     "icons": [
         {
-            "src": "/icons/icon-192x192.png",
-            "sizes": "320x320",
-            "type": "image/png"
-        },
-        {
             "src": "/icons/icon-512x512.png",
-            "sizes": "320X320",
+            "sizes": "144x144",
             "type": "image/png"
         }
     ],
