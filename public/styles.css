@@ -1,6 +1,9 @@
 body {
   font-size: 120%;
   font-family: Arial;
+  background-image: url("/background.jpg");
+  background-size: 350px 300px;
+ 
 }
 
 button, input {
