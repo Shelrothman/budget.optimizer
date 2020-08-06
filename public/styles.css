@@ -11,6 +11,13 @@ button, input {
   font-family: Arial;
 }
 
+.middle {
+  background-color: #85BB65;
+  border-color: darkgreen;
+  border-style: groove;
+  border-width: 7px;
+}
+
 table {
   width: 100%;
 }
