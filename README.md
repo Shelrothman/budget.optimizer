@@ -1,7 +1,7 @@
 # Budget.Optimizer
 A Budget Tracker application that allows for offline access and functionality.
 
-![](https://github.com/Q118/budget.optimzer/blob/master/screenshot.png)
+![](https://github.com/Q118/budget.optimizer/blob/master/screenshot.png)
 
 The user is able to add expenses and deposits to their budget with or without a connection. When entering transactions offline, they populate the total when brought back online.
 
