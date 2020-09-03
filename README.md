@@ -10,7 +10,7 @@ The user is able to add expenses and deposits to their budget with or without a 
     
 * [Installation](#Installation)
 * [Usage](#Usage)
-* [License](#🛡Badge📛)
+* [License](#Badge)
 * [Contact](#Contact)
 
 ## Installation
